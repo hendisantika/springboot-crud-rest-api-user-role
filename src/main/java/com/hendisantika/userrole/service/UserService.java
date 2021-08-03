@@ -52,4 +52,9 @@ public class UserService {
         encodePassword(user);
         userRepository.save(user);
     }
+
+    private void encodePassword(User user) {
+        String encodedPassword = passwordEncoder.encode(user.getPassword());
+        user.setPassword(encodedPassword);
+    }
 }
