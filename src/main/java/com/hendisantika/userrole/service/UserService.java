@@ -26,4 +26,11 @@ public class UserService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    public void registerDefaultUser(User user) {
+        Role roleUser = roleRepo.findByName("USER");
+        user.addRole(roleUser);
+        encodePassword(user);
+        userRepo.save(user);
+    }
 }
