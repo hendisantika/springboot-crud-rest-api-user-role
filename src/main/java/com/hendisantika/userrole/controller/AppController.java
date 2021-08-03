@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+
 /**
  * Created by IntelliJ IDEA.
  * Project : springboot-crud-rest-api-user-role
@@ -41,5 +43,13 @@ public class AppController {
         service.registerDefaultUser(user);
 
         return "register_success";
+    }
+
+    @GetMapping("users")
+    public String listUsers(Model model) {
+        List<User> listUsers = service.listAll();
+        model.addAttribute("listUsers", listUsers);
+
+        return "users";
     }
 }
