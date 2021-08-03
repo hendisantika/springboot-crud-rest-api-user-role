@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by IntelliJ IDEA.
  * Project : springboot-crud-rest-api-user-role
@@ -19,18 +21,30 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
     @Autowired
-    private UserRepository userRepo;
+    private UserRepository userRepository;
 
     @Autowired
-    private RoleRepository roleRepo;
+    private RoleRepository roleRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
 
     public void registerDefaultUser(User user) {
-        Role roleUser = roleRepo.findByName("USER");
+        Role roleUser = roleRepository.findByName("USER");
         user.addRole(roleUser);
         encodePassword(user);
         userRepo.save(user);
+    }
+
+    public List<User> listAll() {
+        return userRepository.findAll();
+    }
+
+    public User get(Long id) {
+        return userRepository.findById(id).get();
+    }
+
+    public List<Role> listRoles() {
+        return roleRepository.findAll();
     }
 }
