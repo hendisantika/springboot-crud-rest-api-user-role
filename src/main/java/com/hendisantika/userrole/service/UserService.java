@@ -47,4 +47,9 @@ public class UserService {
     public List<Role> listRoles() {
         return roleRepository.findAll();
     }
+
+    public void save(User user) {
+        encodePassword(user);
+        userRepository.save(user);
+    }
 }
