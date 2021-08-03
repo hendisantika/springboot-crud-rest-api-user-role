@@ -62,4 +62,11 @@ public class AppController {
         model.addAttribute("listRoles", listRoles);
         return "user_form";
     }
+
+    @PostMapping("/users/save")
+    public String saveUser(User user) {
+        service.save(user);
+
+        return "redirect:/users";
+    }
 }
