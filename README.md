@@ -14,3 +14,9 @@
     ```
 6. Import POSTMAN Collection file into POSTMAN App.
 7. Open Swagger UI: http://localhost:8080/swagger-ui/index.html
+
+### Screenshot
+
+Swagger UI
+
+![Swagger UI](img/swagger.png "Swagger UI")
