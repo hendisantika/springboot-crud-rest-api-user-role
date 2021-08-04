@@ -16,11 +16,11 @@ import java.util.Optional;
  * Time: 06.07
  */
 public interface UserRepository extends JpaRepository<User, Long> {
-    @Query("SELECT u FROM User u WHERE u.email = ?1")
-    User findByEmail(String email);
+//    @Query("SELECT u FROM User u WHERE u.email = ?1")
+//    User findByEmail(String email);
 
-    @Query("SELECT u FROM User u WHERE u.email = ?1 or u.username = ?2")
-    User findByEmailOrUsername(String email, String username);
+    @Query("SELECT u FROM User u WHERE u.email = ?1 or u.username = ?1")
+    User findByEmailOrUsername(String email);
 
-    Optional<User> findByEmail2(String email);
+    Optional<User> findByEmail(String email);
 }
