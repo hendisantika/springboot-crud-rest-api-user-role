@@ -1,5 +1,7 @@
 package com.hendisantika.userrole.service;
 
+import com.hendisantika.userrole.entity.Role;
+import com.hendisantika.userrole.entity.User;
 import com.hendisantika.userrole.repository.RoleRepository;
 import com.hendisantika.userrole.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +35,7 @@ public class UserService {
         Role roleUser = roleRepository.findByName("USER");
         user.addRole(roleUser);
         encodePassword(user);
-        userRepo.save(user);
+        userRepository.save(user);
     }
 
     public List<User> listAll() {

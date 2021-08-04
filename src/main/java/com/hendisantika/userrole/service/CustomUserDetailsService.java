@@ -1,5 +1,6 @@
 package com.hendisantika.userrole.service;
 
+import com.hendisantika.userrole.entity.User;
 import com.hendisantika.userrole.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

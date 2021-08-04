@@ -1,5 +1,8 @@
 package com.hendisantika.userrole.service;
 
+import com.hendisantika.userrole.entity.Role;
+import com.hendisantika.userrole.entity.User;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

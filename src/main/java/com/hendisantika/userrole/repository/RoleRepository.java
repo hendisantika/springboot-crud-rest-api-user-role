@@ -1,5 +1,6 @@
 package com.hendisantika.userrole.repository;
 
+import com.hendisantika.userrole.entity.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

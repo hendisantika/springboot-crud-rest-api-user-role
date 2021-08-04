@@ -1,5 +1,7 @@
 package com.hendisantika.userrole.controller;
 
+import com.hendisantika.userrole.entity.Role;
+import com.hendisantika.userrole.entity.User;
 import com.hendisantika.userrole.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
