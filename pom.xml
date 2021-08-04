@@ -15,6 +15,7 @@
     <description>springboot-crud-rest-api-user-role</description>
     <properties>
         <java.version>11</java.version>
+        <swagger.version>3.0.0</swagger.version>
     </properties>
     <dependencies>
         <dependency>
@@ -74,6 +75,11 @@
         <!--            <groupId>org.webjars</groupId>-->
         <!--            <artifactId>webjars-locator-core</artifactId>-->
         <!--        </dependency>-->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-boot-starter</artifactId>
+            <version>3.0.0</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
