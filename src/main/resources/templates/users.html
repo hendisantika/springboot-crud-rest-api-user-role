@@ -33,6 +33,7 @@
 				<th>First Name</th>
 				<th>Last Name</th>
 				<th>Roles</th>
+				<th>Created On</th>
 				<th></th>
 			</tr>
 			</thead>
@@ -44,6 +45,7 @@
 				<td th:text="${user.firstName}">First Name</td>
 				<td th:text="${user.lastName}">Last Name</td>
 				<td th:text="${user.roles}">Roles</td>
+				<td th:text="${#temporals.format(user.createdOn, 'dd-MM-yyyy HH:mm')}">Created On</td>
 				<td><a th:href="@{'/users/edit/' + ${user.id}}">Edit</a></td>
 			</tr>
 			</tbody>

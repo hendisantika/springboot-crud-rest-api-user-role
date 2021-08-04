@@ -3,9 +3,12 @@ package com.hendisantika.userrole.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.domain.AuditorAware;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,6 +26,7 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@EntityListeners(AuditListener.class)
 public class User {
 
     @Id
@@ -44,6 +48,9 @@ public class User {
 
     @Column(name = "last_name", nullable = false, length = 20)
     private String lastName;
+
+    @CreatedDate
+    private LocalDateTime createdOn;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
