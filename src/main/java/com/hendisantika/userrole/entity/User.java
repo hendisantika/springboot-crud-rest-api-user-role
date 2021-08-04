@@ -40,7 +40,7 @@ public class User {
     @Email
     private String email;
 
-    @Column(name = "full_name", nullable = false, length = 20)
+    @Column(name = "full_name", nullable = false, length = 100)
     private String fullName;
 
     @CreatedDate
