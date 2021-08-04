@@ -33,7 +33,7 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public List<User> listAll() {
+    public Iterable<User> listAll() {
         return userRepository.findAll();
     }
 

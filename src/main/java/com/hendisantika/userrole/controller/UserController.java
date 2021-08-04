@@ -4,12 +4,19 @@ import com.hendisantika.userrole.entity.User;
 import com.hendisantika.userrole.exception.UserRegistrationException;
 import com.hendisantika.userrole.repository.UserRepository;
 import com.hendisantika.userrole.service.UserService;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.convert.converter.Converter;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,6 +29,7 @@ import java.util.Optional;
  * Date: 04/08/21
  * Time: 08.05
  */
+@Log4j2
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
@@ -44,8 +52,8 @@ public class UserController {
     }
 
     @GetMapping
-    public List<User> getAllUsers() {
-        return userService.listAll();
+    public Page<User> getAllUsers(Pageable pageable) {
+        return userRepository.findAll(pageable);
     }
 
     @GetMapping("/{id}")
@@ -77,4 +85,13 @@ public class UserController {
                 })
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
+
+    @GetMapping("/filter")
+    public List<User> filterUserByCreatedOn(@RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        LocalDateTime startDate1 = LocalDateTime.parse(startDate, formatter);
+        LocalDateTime endDate1 = LocalDateTime.parse(endDate, formatter);
+        return userRepository.findByCreatedOn(startDate1, endDate1);
+    }
+
 }
