@@ -6,14 +6,11 @@ import com.hendisantika.userrole.repository.UserRepository;
 import com.hendisantika.userrole.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -34,7 +31,6 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    @PreAuthorize("hasAnyAuthority('SUPER ADMIN', 'ADMIN', 'EDITOR')")
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public User saveUser(@RequestBody @Valid User user) {
@@ -45,5 +41,37 @@ public class UserController {
         userService.registerDefaultUser(user);
         User userEntity = userRepository.findByEmail(user.getEmail()).get();
         return userEntity;
+    }
+
+    @GetMapping
+    public List<User> getAllUsers() {
+        return userService.listAll();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<User> getUserById(@PathVariable Long id) {
+        return userRepository.findById(id)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody @Valid User user) {
+        return userRepository.findById(id)
+                .map(userObj -> {
+                    userObj.setId(id);
+                    return ResponseEntity.ok(userService.updateUser(userObj));
+                })
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<User> deleteUser(@PathVariable Long id) {
+        return userRepository.findById(id)
+                .map(user -> {
+                    userService.deleteUserById(id);
+                    return ResponseEntity.ok(user);
+                })
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 }

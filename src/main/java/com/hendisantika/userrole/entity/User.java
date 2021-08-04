@@ -40,14 +40,8 @@ public class User {
     @Email
     private String email;
 
-    @Column(nullable = false, length = 64)
-    private String password;
-
-    @Column(name = "first_name", nullable = false, length = 20)
-    private String firstName;
-
-    @Column(name = "last_name", nullable = false, length = 20)
-    private String lastName;
+    @Column(name = "full_name", nullable = false, length = 20)
+    private String fullName;
 
     @CreatedDate
     private LocalDateTime createdOn;

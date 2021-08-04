@@ -5,7 +5,6 @@ import com.hendisantika.userrole.entity.User;
 import com.hendisantika.userrole.repository.RoleRepository;
 import com.hendisantika.userrole.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,13 +27,9 @@ public class UserService {
     @Autowired
     private RoleRepository roleRepository;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
     public void registerDefaultUser(User user) {
         Role roleUser = roleRepository.findByName("USER");
         user.addRole(roleUser);
-        encodePassword(user);
         userRepository.save(user);
     }
 
@@ -51,12 +46,14 @@ public class UserService {
     }
 
     public void save(User user) {
-        encodePassword(user);
         userRepository.save(user);
     }
 
-    private void encodePassword(User user) {
-        String encodedPassword = passwordEncoder.encode(user.getPassword());
-        user.setPassword(encodedPassword);
+    public User updateUser(User user) {
+        return userRepository.save(user);
+    }
+
+    public void deleteUserById(Long id) {
+        userRepository.deleteById(id);
     }
 }
