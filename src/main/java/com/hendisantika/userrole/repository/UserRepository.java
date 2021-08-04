@@ -4,6 +4,8 @@ import com.hendisantika.userrole.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.Optional;
+
 /**
  * Created by IntelliJ IDEA.
  * Project : springboot-crud-rest-api-user-role
@@ -20,4 +22,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query("SELECT u FROM User u WHERE u.email = ?1 or u.username = ?2")
     User findByEmailOrUsername(String email, String username);
 
+    Optional<User> findByEmail2(String email);
 }
