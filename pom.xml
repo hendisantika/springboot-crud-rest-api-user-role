@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.9.9</version>
+        <version>3.0.0</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.hendisantika</groupId>
@@ -14,7 +14,7 @@
     <name>springboot-crud-rest-api-user-role</name>
     <description>springboot-crud-rest-api-user-role</description>
     <properties>
-        <java.version>11</java.version>
+        <java.version>21</java.version>
         <swagger.version>3.0.0</swagger.version>
     </properties>
     <dependencies>
