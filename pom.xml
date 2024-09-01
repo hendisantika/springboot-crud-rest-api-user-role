@@ -5,13 +5,13 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.1.5</version>
+        <version>3.1.6</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.hendisantika</groupId>
     <artifactId>user-role</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>springboot-crud-rest-api-user-role</name>
+    <name>springboot-crud-rest-api-user-role</neame>
     <description>springboot-crud-rest-api-user-role</description>
     <properties>
         <java.version>21</java.version>
