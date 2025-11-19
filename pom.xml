@@ -11,11 +11,11 @@
     <groupId>com.hendisantika</groupId>
     <artifactId>user-role</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>springboot-crud-rest-api-user-role</neame>
+    <name>springboot-crud-rest-api-user-role</name>
     <description>springboot-crud-rest-api-user-role</description>
     <properties>
         <java.version>21</java.version>
-        <swagger.version>3.0.0</swagger.version>
+        <springdoc.version>2.7.0</springdoc.version>
     </properties>
     <dependencies>
         <dependency>
@@ -76,9 +76,9 @@
         <!--            <artifactId>webjars-locator-core</artifactId>-->
         <!--        </dependency>-->
         <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-boot-starter</artifactId>
-            <version>3.0.0</version>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>${springdoc.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -105,6 +105,19 @@
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>

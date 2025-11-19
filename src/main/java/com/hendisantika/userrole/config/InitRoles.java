@@ -2,8 +2,7 @@ package com.hendisantika.userrole.config;
 
 import com.hendisantika.userrole.entity.Role;
 import com.hendisantika.userrole.repository.RoleRepository;
-
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 
 /**
  * Created by IntelliJ IDEA.
