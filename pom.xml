@@ -15,7 +15,7 @@
     <description>springboot-crud-rest-api-user-role</description>
     <properties>
         <java.version>21</java.version>
-        <springdoc.version>2.8.14</springdoc.version>
+        <springdoc.version>3.0.0</springdoc.version>
     </properties>
     <dependencies>
         <dependency>
