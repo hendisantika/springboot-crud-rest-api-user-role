@@ -1,15 +1,21 @@
 # Spring Boot CRUD REST API - User & Role Management
 
-A production-ready RESTful API built with Spring Boot 3.5.7 for managing users and roles with comprehensive CRUD
+[![Java CI with Maven](https://github.com/hendisantika/springboot-crud-rest-api-user-role/actions/workflows/maven.yml/badge.svg)](https://github.com/hendisantika/springboot-crud-rest-api-user-role/actions/workflows/maven.yml)
+![Java](https://img.shields.io/badge/Java-25-orange?logo=openjdk)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-4.1.2-6DB33F?logo=springboot)
+[![Dependabot](https://img.shields.io/badge/Dependabot-enabled-025E8C?logo=dependabot)](.github/dependabot.yml)
+
+A production-ready RESTful API built with Spring Boot 4.1.2 for managing users and roles with comprehensive CRUD
 operations, pagination, filtering, and interactive API documentation.
 
 ## Tech Stack
 
-- **Java 21** - Latest LTS version
-- **Spring Boot 3.5.7** - Latest Spring Boot framework
-- **Spring Data JPA** - Data access layer with Hibernate
+- **Java 25** - Latest LTS version
+- **Spring Boot 4.1.2** - Latest Spring Boot framework
+- **Spring Data JPA** - Data access layer with Hibernate 7
 - **MySQL 8** - Relational database
-- **SpringDoc OpenAPI 2.7.0** - API documentation (Swagger UI)
+- **H2** - In-memory database for tests
+- **SpringDoc OpenAPI 3.2.0** - API documentation (Swagger UI)
 - **Lombok** - Reducing boilerplate code
 - **Maven** - Dependency management and build tool
 
@@ -26,7 +32,7 @@ operations, pagination, filtering, and interactive API documentation.
 
 ## Prerequisites
 
-- Java 21 or higher
+- Java 25 or higher
 - MySQL 8.0 or higher
 - Maven 3.6 or higher
 
@@ -169,9 +175,12 @@ curl "http://localhost:8080/api/users/filter?startDate=2025-01-01%2000:00&endDat
 | user_id | BIGINT  | FOREIGN KEY → users(id) |
 | role_id | INTEGER | FOREIGN KEY → roles(id) |
 
-## Migration to Spring Boot 3.x
+## Migration to Spring Boot 4.x
 
-This project has been migrated from Spring Boot 2.x to 3.5.7. Key changes include:
+This project has been migrated from Spring Boot 2.x to 3.x and now to 4.1.2. Key changes include:
+
+- **Hibernate 7**: Removed `org.hibernate.dialect.MySQL8Dialect`; the dialect is now auto-detected (`MySQLDialect`)
+- **Java 25**: Project now targets JDK 25
 
 - **Jakarta EE Migration**: All `javax.*` packages have been replaced with `jakarta.*`
     - `javax.persistence.*` → `jakarta.persistence.*`
@@ -217,11 +226,35 @@ src/main/java/com/hendisantika/userrole/
 mvn test
 ```
 
+Tests use an in-memory **H2** database (configured in `src/test/resources/application.properties`), so no running
+MySQL instance is required.
+
 ### Building for Production
 
 ```bash
 mvn clean package -DskipTests
 ```
+
+## CI/CD & Dependency Management
+
+### GitHub Actions
+
+The [`Java CI with Maven`](.github/workflows/maven.yml) workflow runs on every push and pull request to `main`:
+
+- Sets up **JDK 25** (Temurin) with Maven cache
+- Runs `mvn -B verify` (compile + tests on H2)
+- Submits the Maven dependency graph to GitHub (push to `main` only) for better Dependabot alerts
+
+### Dependabot
+
+[`.github/dependabot.yml`](.github/dependabot.yml) keeps dependencies up to date automatically:
+
+| Ecosystem      | Schedule                      | Grouping                                                       |
+|----------------|-------------------------------|----------------------------------------------------------------|
+| Maven          | Daily, 05:00 Asia/Jakarta     | `spring-boot`, `springdoc`, other minor/patch bumps in one PR  |
+| GitHub Actions | Weekly (Monday), 05:00 WIB    | All actions in one PR                                          |
+
+PRs are labeled (`dependencies`, `java` / `github-actions`) and use conventional commit prefixes (`deps`, `ci`).
 
 ## Troubleshooting
 
@@ -275,6 +308,9 @@ This project is open source and available under the MIT License.
 
 ### Version 0.0.1-SNAPSHOT
 
+- Upgraded to Java 25 and Spring Boot 4.1.2
+- Fixed CI build (Hibernate 7 dialect, H2 for tests, updated GitHub Actions)
+- Enhanced Dependabot (Maven + GitHub Actions, grouped updates)
 - Migrated to Spring Boot 3.5.7
 - Upgraded to Java 21
 - Migrated from Springfox to SpringDoc OpenAPI
