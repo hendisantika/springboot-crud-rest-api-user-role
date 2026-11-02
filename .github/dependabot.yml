@@ -1,9 +1,61 @@
 version: 2
 updates:
+  # Maven dependencies (pom.xml)
   - package-ecosystem: maven
     directory: "/"
     schedule:
       interval: daily
-      time: '05:00'
+      time: "05:00"
       timezone: Asia/Jakarta
     open-pull-requests-limit: 10
+    target-branch: main
+    labels:
+      - dependencies
+      - java
+    assignees:
+      - hendisantika
+    commit-message:
+      prefix: "deps"
+      prefix-development: "deps-dev"
+      include: scope
+    groups:
+      # Spring Boot parent & starters move together
+      spring-boot:
+        patterns:
+          - "org.springframework.boot*"
+      springdoc:
+        patterns:
+          - "org.springdoc*"
+      # Everything else: bundle minor & patch bumps into a single PR
+      maven-minor-patch:
+        patterns:
+          - "*"
+        exclude-patterns:
+          - "org.springframework.boot*"
+          - "org.springdoc*"
+        update-types:
+          - minor
+          - patch
+
+  # GitHub Actions used in .github/workflows
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+      time: "05:00"
+      timezone: Asia/Jakarta
+    open-pull-requests-limit: 5
+    target-branch: main
+    labels:
+      - dependencies
+      - github-actions
+    assignees:
+      - hendisantika
+    commit-message:
+      prefix: "ci"
+      include: scope
+    groups:
+      github-actions:
+        patterns:
+          - "*"
